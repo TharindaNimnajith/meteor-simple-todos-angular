@@ -1,9 +1,9 @@
+// noinspection JSUnresolvedFunction,JSValidateTypes
+
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import { Meteor } from 'meteor/meteor';
-import { Tasks } from '../../api/tasks.js';
-
-import template from './todosList.html';
+import {Meteor} from 'meteor/meteor';
+import {Tasks} from '../../api/tasks.js';
 
 class TodosListCtrl {
   constructor($scope) {
@@ -24,7 +24,7 @@ class TodosListCtrl {
           };
         }
 
-        // Show newest tasks at the top
+        // Show the newest tasks at the top
         return Tasks.find(selector, {
           sort: {
             createdAt: -1

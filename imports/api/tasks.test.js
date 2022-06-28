@@ -1,10 +1,11 @@
 /* eslint-env mocha */
+// noinspection JSUnresolvedFunction,NpmUsedModulesInstalled,JSUnresolvedVariable
 
-import { Meteor } from 'meteor/meteor';
-import { Random } from 'meteor/random';
-import { assert } from 'meteor/practicalmeteor:chai';
+import {Meteor} from 'meteor/meteor';
+import {Random} from 'meteor/random';
+import {assert} from 'meteor/practicalmeteor:chai';
 
-import { Tasks } from './tasks.js';
+import {Tasks} from './tasks.js';
 
 if (Meteor.isServer) {
   describe('Tasks', () => {
@@ -23,7 +24,7 @@ if (Meteor.isServer) {
       });
 
       it('can delete owned task', () => {
-        // Find the internal implementation of the task method so we can
+        // Find the internal implementation of the task method, so we can
         // test it in isolation
         const deleteTask = Meteor.server.method_handlers['tasks.remove'];
 

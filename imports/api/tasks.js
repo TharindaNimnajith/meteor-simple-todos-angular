@@ -1,6 +1,6 @@
-import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
-import { check } from 'meteor/check';
+import {Meteor} from 'meteor/meteor';
+import {Mongo} from 'meteor/mongo';
+import {check} from 'meteor/check';
 
 export const Tasks = new Mongo.Collection('tasks');
 
@@ -15,13 +15,13 @@ if (Meteor.isServer) {
         }
       }, {
         owner: this.userId
-      }, ],
+      },],
     });
   });
 }
 
 Meteor.methods({
-  'tasks.insert' (text) {
+  'tasks.insert'(text) {
     check(text, String);
 
     // Make sure the user is logged in before inserting a task
@@ -36,7 +36,7 @@ Meteor.methods({
       username: Meteor.user().username,
     });
   },
-  'tasks.remove' (taskId) {
+  'tasks.remove'(taskId) {
     check(taskId, String);
 
     const task = Tasks.findOne(taskId);
@@ -47,7 +47,7 @@ Meteor.methods({
 
     Tasks.remove(taskId);
   },
-  'tasks.setChecked' (taskId, setChecked) {
+  'tasks.setChecked'(taskId, setChecked) {
     check(taskId, String);
     check(setChecked, Boolean);
 
@@ -63,7 +63,7 @@ Meteor.methods({
       }
     });
   },
-  'tasks.setPrivate' (taskId, setToPrivate) {
+  'tasks.setPrivate'(taskId, setToPrivate) {
     check(taskId, String);
     check(setToPrivate, Boolean);
 

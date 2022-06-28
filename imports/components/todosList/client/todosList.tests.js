@@ -1,22 +1,23 @@
 /* eslint-env mocha */
+// noinspection JSUnresolvedFunction,JSValidateTypes,NpmUsedModulesInstalled
 
 import 'angular-mocks';
-import { Meteor } from 'meteor/meteor';
-import { assert } from 'meteor/practicalmeteor:chai';
-import { sinon } from 'meteor/practicalmeteor:sinon';
+import {Meteor} from 'meteor/meteor';
+import {assert} from 'meteor/practicalmeteor:chai';
+import {sinon} from 'meteor/practicalmeteor:sinon';
 
 import todosList from '../todosList';
 
-describe('todosList', function() {
-  var element;
+describe('todosList', function () {
+  let element;
 
-  beforeEach(function() {
-    var $compile;
-    var $rootScope;
+  beforeEach(function () {
+    let $compile;
+    let $rootScope;
 
     window.module(todosList.name);
 
-    inject(function(_$compile_, _$rootScope_){
+    inject(function (_$compile_, _$rootScope_) {
       $compile = _$compile_;
       $rootScope = _$rootScope_;
     });
@@ -25,21 +26,21 @@ describe('todosList', function() {
     $rootScope.$digest();
   });
 
-  describe('component', function() {
-    it('should be showing incomplete tasks count', function() {
+  describe('component', function () {
+    it('should be showing incomplete tasks count', function () {
       assert.include(element[0].querySelector('h1').innerHTML, '0');
     });
   });
 
-  describe('controller', function() {
-    describe('addTask', function() {
-      var controller;
-      var newTask = 'Be more fabolous';
+  describe('controller', function () {
+    describe('addTask', function () {
+      let controller;
+      let newTask = 'Be more fabulous';
 
       beforeEach(() => {
         sinon.stub(Meteor, 'call');
         controller = element.controller('todosList');
-        controller.newTask = 'Be fabolous';
+        controller.newTask = 'Be fabulous';
         controller.addTask(newTask);
       });
 
@@ -47,12 +48,12 @@ describe('todosList', function() {
         Meteor.call.restore();
       });
 
-      it('should call tasks.insert method', function() {
+      it('should call tasks.insert method', function () {
         sinon.assert.calledOnce(Meteor.call);
         sinon.assert.calledWith(Meteor.call, 'tasks.insert', newTask);
       });
 
-      it('should reset newTask', function() {
+      it('should reset newTask', function () {
         assert.equal(controller.newTask, '');
       });
     });
